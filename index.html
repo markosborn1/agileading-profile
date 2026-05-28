@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Osborn | Federal Technology & AI Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f5f0;
+    --accent: #b8860b;
+    --accent-light: #d4a843;
+    --muted: #6b6b7b;
+    --border: #d4d0c8;
+    --card-bg: #ffffff;
+    --chat-user: #eee8d5;
+    --chat-ai: #fff;
+    --shadow: rgba(26,26,46,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 60px 40px 50px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(184,134,11,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(212,168,67,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    max-width: 620px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .hero-sub strong {
+    color: var(--accent-light);
+    font-weight: 500;
+  }
+
+  .hero-creds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+  }
+
+  .cred-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(184,134,11,0.4);
+    border-radius: 20px;
+    color: var(--accent-light);
+    background: rgba(184,134,11,0.08);
+  }
+
+  /* METRICS BAR */
+  .metrics {
+    max-width: 900px;
+    margin: -30px auto 0;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 1.0s;
+  }
+
+  .metrics-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px var(--shadow), 0 1px 3px var(--shadow);
+    overflow: hidden;
+  }
+
+  .metric {
+    padding: 24px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .metric:last-child { border-right: none; }
+
+  .metric-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* HIGHLIGHTS */
+  .highlights {
+    max-width: 900px;
+    margin: 48px auto 0;
+    padding: 0 40px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .highlight-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    cursor: default;
+  }
+
+  .highlight-card:hover {
+    box-shadow: 0 8px 30px var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .hl-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .hl-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .hl-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .hl-stat {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* CHAT */
+  .chat-section {
+    max-width: 900px;
+    margin: 48px auto 0;
+    padding: 0 40px 60px;
+  }
+
+  .chat-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px var(--shadow);
+    overflow: hidden;
+  }
+
+  .chat-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-dot {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  .chat-header-text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .chat-header-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .chat-messages {
+    padding: 24px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .msg {
+    max-width: 80%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    animation: msgIn 0.3s ease;
+  }
+
+  .msg-ai {
+    background: var(--paper);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg-user {
+    background: var(--ink);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .msg-loading {
+    display: flex;
+    gap: 6px;
+    padding: 14px 18px;
+    align-self: flex-start;
+    background: var(--paper);
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .dot-bounce {
+    width: 8px; height: 8px;
+    background: var(--muted);
+    border-radius: 50%;
+    animation: bounce 1.4s ease infinite;
+  }
+
+  .dot-bounce:nth-child(2) { animation-delay: 0.2s; }
+  .dot-bounce:nth-child(3) { animation-delay: 0.4s; }
+
+  .chat-input-area {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    background: var(--paper);
+    transition: border-color 0.2s;
+  }
+
+  .chat-input:focus {
+    border-color: var(--accent);
+  }
+
+  .chat-input::placeholder {
+    color: #aaa;
+  }
+
+  .chat-send {
+    padding: 12px 24px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .chat-send:hover { background: #2a2a4e; }
+  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .suggested-qs {
+    padding: 0 24px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sq-btn {
+    padding: 8px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .sq-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(184,134,11,0.05);
+  }
+
+  /* FOOTER */
+  .footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    text-align: center;
+  }
+
+  .footer-line {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer-line a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .hero { padding: 40px 20px 36px; }
+    .metrics { padding: 0 20px; }
+    .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+    .metric:nth-child(2) { border-right: none; }
+    .metric:nth-child(3) { border-top: 1px solid var(--border); }
+    .metric:nth-child(4) { border-top: 1px solid var(--border); }
+    .highlights { padding: 0 20px; }
+    .highlight-grid { grid-template-columns: 1fr; }
+    .chat-section { padding: 0 20px 40px; }
+    .msg { max-width: 90%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Federal Technology &amp; AI Leader</div>
+    <h1>Mark Osborn</h1>
+    <p class="hero-sub">
+      20 years delivering technology transformation across <strong>defense, federal, and commercial</strong> environments.
+      Currently shipping AI products for the U.S. Department of Energy. Combat veteran. Builder.
+    </p>
+    <div class="hero-creds">
+      <span class="cred-pill">Azure AI-102</span>
+      <span class="cred-pill">SAFe SPC6</span>
+      <span class="cred-pill">PMP</span>
+      <span class="cred-pill">TS/SCI Eligible</span>
+      <span class="cred-pill">MBA</span>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric">
+      <div class="metric-val">20+</div>
+      <div class="metric-label">Years Experience</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">$65M+</div>
+      <div class="metric-label">Portfolio Managed</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">$10M</div>
+      <div class="metric-label">Revenue Secured</div>
+    </div>
+    <div class="metric">
+      <div class="metric-val">6</div>
+      <div class="metric-label">Industries Spanned</div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<div class="highlights">
+  <div class="section-label">Selected Impact</div>
+  <div class="highlight-grid">
+    <div class="highlight-card">
+      <div class="hl-org">U.S. Department of Energy</div>
+      <div class="hl-title">AI Grant Review System</div>
+      <div class="hl-desc">Shipped LLM-powered grant review agents within federal AI governance frameworks, cutting review cycles by 4 days per application. Secured contract to deploy AI across 12+ DOE offices.</div>
+      <span class="hl-stat">4 days saved per review &rarr;</span>
+    </div>
+    <div class="highlight-card">
+      <div class="hl-org">NY Department of Health</div>
+      <div class="hl-title">IT System Modernization</div>
+      <div class="hl-desc">Directed full system modernization for a state health agency, transitioning from waterfall to agile delivery and shipping 4 months ahead of schedule.</div>
+      <span class="hl-stat">4 months early &rarr;</span>
+    </div>
+    <div class="highlight-card">
+      <div class="hl-org">EY &bull; Cognizant</div>
+      <div class="hl-title">Mobile Audit App Launch</div>
+      <div class="hl-desc">Led dual iOS and Android Scrum teams to build and launch a field audit app for EY tax auditors. Tracked engagement data and drove rapid adoption post-launch.</div>
+      <span class="hl-stat">50% adoption in 90 days &rarr;</span>
+    </div>
+    <div class="highlight-card">
+      <div class="hl-org">Verizon</div>
+      <div class="hl-title">Enterprise Agile Transformation</div>
+      <div class="hl-desc">Defined value-based KPIs across product teams, built executive dashboards for delivery health, and ensured on-schedule releases with no cost overruns.</div>
+      <span class="hl-stat">Enterprise-wide rollout &rarr;</span>
+    </div>
+    <div class="highlight-card">
+      <div class="hl-org">Booz Allen Hamilton</div>
+      <div class="hl-title">$40M Process Reengineering</div>
+      <div class="hl-desc">Managed a $40M business process reengineering initiative for a Fortune 50 multinational, improving processing times by 33% and accuracy by 25%.</div>
+      <span class="hl-stat">33% faster processing &rarr;</span>
+    </div>
+    <div class="highlight-card">
+      <div class="hl-org">U.S. Department of Energy</div>
+      <div class="hl-title">Contract Renewals During Cuts</div>
+      <div class="hl-desc">Secured two $5M/year contract renewals during widespread federal program cancellations, sustaining $10M in annual revenue when comparable programs were eliminated.</div>
+      <span class="hl-stat">$10M/yr sustained &rarr;</span>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-section">
+  <div class="section-label">Ask Me Anything</div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-dot"></div>
+      <div>
+        <div class="chat-header-text">AI-Powered Q&amp;A</div>
+        <div class="chat-header-sub">Ask about Mark's experience, capabilities, or background</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-ai">Welcome — I can answer questions about Mark's professional background, delivery track record, certifications, and experience across federal, defense, and commercial sectors. What would you like to know?</div>
+    </div>
+    <div class="suggested-qs" id="suggestedQs">
+      <button class="sq-btn" onclick="askSuggested(this)">What AI products has Mark built?</button>
+      <button class="sq-btn" onclick="askSuggested(this)">Tell me about his federal experience</button>
+      <button class="sq-btn" onclick="askSuggested(this)">What's his management consulting background?</button>
+      <button class="sq-btn" onclick="askSuggested(this)">How has he driven digital transformation?</button>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask about Mark's background..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" id="chatSend" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p class="footer-line">Mark Osborn &bull; <a href="mailto:mark@agileading.com">mark@agileading.com</a> &bull; (703) 945-0455</p>
+</div>
+
+<script>
+const MARK_CONTEXT = `You are an AI assistant on Mark Osborn's professional profile page. Answer questions about Mark based ONLY on the following information. Be concise (2-4 sentences), confident, and professional. Do not invent information beyond what is provided. If asked something not covered, say you don't have that specific detail but offer what you do know.
+
+PROFESSIONAL SUMMARY:
+Mark Osborn is a product leader and combat veteran with 20+ years delivering technology solutions across defense, federal, and commercial environments. He specializes in AI-enabled product development, having shipped LLM-powered products for the U.S. Department of Energy within federal regulatory and compliance frameworks. He holds a TS/SCI eligibility.
+
+CURRENT ROLE - IvoryCloud (Jan 2024 - Present):
+- Lead Product Manager on the DOE EPIC contract
+- Shipped LLM-powered grant review agents for DOE within federal AI governance frameworks, cutting application review cycles by 4 days per application
+- Led applicant-facing IT platform serving $200M+ in federal grant funding; achieved 40% increase in application completion rates and sub-2-second SLA performance
+- Drove organizational change by persuading DOE senior leadership to modernize an offline, email-based decision process onto the IT platform; automated workflow eliminated 30 hrs/week of manual tracking
+- Achieved 95% on-time delivery, 80% PI Objective attainment, and 40% sprint velocity improvement across 6 product teams on a $25M+ portfolio
+- Secured two $5M/year contract renewals during widespread federal program cancellations, sustaining $10M in annual federal IT revenue
+- Built product management capability from scratch; mentored 4 Product Owners and 2 UX Designers; team shipped 1 AI product and secured contract to implement AI across 12+ DOE offices
+
+CISCO (Jan 2023 - Jan 2024):
+- Technical Agile Coach; led product strategy and roadmap for 300-person Customer Experience platform migration
+- Defined MVP, drove cross-functional alignment on highest-risk enterprise migration
+
+AGILEADING LLC (Sep 2020 - Present):
+- Managing Partner/Co-Founder; certified SDVOSB (Service-Disabled Veteran-Owned Small Business)
+- Completed $5M modernization project for US government 2 months early
+- Managed product strategy, end-to-end delivery, staffing, and budgeting
+
+VERIZON (May 2018 - Sep 2020):
+- Enterprise Agile Coach; defined value-based KPIs for product teams across the department
+- Established executive dashboards to track delivery health; on-schedule releases with no cost overruns exceeding $1M
+
+T. ROWE PRICE (Oct 2017 - May 2018):
+- Pioneered agile transformation for IT department (~900 personnel); cut software delivery time by 3 months
+
+COGNIZANT / EY (Jan 2015 - Sep 2017):
+- Led two mobile application Scrum teams (iOS and Android) delivering a field audit app for EY tax auditors
+- Achieved 50% app adoption within 3 months of launch
+- Directed NY Department of Health IT system modernization; delivered 4 months ahead of schedule
+
+ACCENTURE (Jan 2014 - Jan 2015):
+- Identified and mitigated operational risks by 33% within a Fortune 50 Multinational's commercial banking sector
+
+BOOZ ALLEN HAMILTON (Oct 2010 - Oct 2013):
+- Managed $40M business process reengineering initiative for a Fortune 50 Multinational; boosted processing times by 33% and accuracy by 25%
+- Advised U.S. Intelligence Community senior officials on IT strategy and 3,000-person global workforce reorganization
+
+MILITARY SERVICE - U.S. Army (May 2003 - Jun 2009):
+- Military Intelligence Officer; led intelligence operations in Baghdad (2007-2008 deployment)
+- Synthesized assessments from 100+ sources; briefed U.S. Commanding General and U.S. Ambassador
+
+EDUCATION & CERTIFICATIONS:
+- MBA, International Management - Mannheim Business School
+- BSc, Business Administration - University of Vermont
+- Azure AI Engineer Associate (AI-102) - Microsoft
+- SAFe Program Consultant (SPC6) - Scaled Agile
+- Project Management Professional (PMP) - PMI
+
+KEY COMPETENCIES: AI/ML Product Development, Combat Domain Experience, Hands-On AI Delivery, Requirements Authoring & Validation, Risk Management & Product Delivery, Organizational Change & Program Scale, Federal Contracting, Agile Transformation, Digital Modernization`;
+
+const messagesEl = document.getElementById('chatMessages');
+const inputEl = document.getElementById('chatInput');
+const sendBtn = document.getElementById('chatSend');
+const suggestedEl = document.getElementById('suggestedQs');
+
+function addMessage(text, type) {
+  const div = document.createElement('div');
+  div.className = `msg msg-${type}`;
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function showLoading() {
+  const div = document.createElement('div');
+  div.className = 'msg-loading';
+  div.id = 'loadingMsg';
+  div.innerHTML = '<div class="dot-bounce"></div><div class="dot-bounce"></div><div class="dot-bounce"></div>';
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function hideLoading() {
+  const el = document.getElementById('loadingMsg');
+  if (el) el.remove();
+}
+
+async function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text) return;
+
+  inputEl.value = '';
+  sendBtn.disabled = true;
+  suggestedEl.style.display = 'none';
+
+  addMessage(text, 'user');
+  showLoading();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: MARK_CONTEXT,
+        messages: [{ role: 'user', content: text }]
+      })
+    });
+
+    const data = await response.json();
+    hideLoading();
+
+    const aiText = data.content
+      ?.filter(b => b.type === 'text')
+      .map(b => b.text)
+      .join('\n') || 'Sorry, I wasn\'t able to process that. Try asking another question.';
+
+    addMessage(aiText, 'ai');
+  } catch (err) {
+    hideLoading();
+    addMessage('Something went wrong connecting to the AI. Please try again.', 'ai');
+  }
+
+  sendBtn.disabled = false;
+  inputEl.focus();
+}
+
+function askSuggested(btn) {
+  inputEl.value = btn.textContent;
+  sendMessage();
+}
+</script>
+</body>
+</html>
